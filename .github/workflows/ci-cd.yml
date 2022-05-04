@@ -1,0 +1,58 @@
+name: CI-CD workflow
+
+on:
+  push:
+    branches:
+      - develop
+
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: install packages
+        run: npm ci
+
+      - name: build
+        run: npm run build
+
+      - name: run tests
+        run: npm run test
+
+      - name: build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./build
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+
+    steps:
+      - name: download build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: ./build
+
+      - name: deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
