@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Layout, Menu, MenuProps } from "antd";
+import { Layout, Menu, MenuProps, message } from "antd";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Shop from "./Shop";
 import About from "./About";
@@ -51,7 +51,15 @@ const App: FC = () => {
             items={items}
             selectedKeys={[pathname]}
           ></Menu>
-          <Cart items={cart} />
+          <Cart
+            items={cart}
+            onConfirm={(items) => {
+              setCart([]);
+              message.success(
+                `You confirmed the order with ${items.length} products!`
+              );
+            }}
+          />
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <div className="site-layout-content" data-testid="content">

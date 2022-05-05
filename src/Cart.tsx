@@ -2,17 +2,19 @@ import { useState, FC } from "react";
 import { Affix, Modal, Button } from "antd";
 import { Table } from "antd";
 import { CartItem } from "./CartItem";
-export type CounterProps = {
+export type CartProps = {
   items: CartItem[];
+  onConfirm?(items: CartItem[]): void;
 };
 
-const Cart: FC<CounterProps> = ({ items }) => {
+const Cart: FC<CartProps> = ({ items, onConfirm }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
+    onConfirm && onConfirm(items);
     setIsModalVisible(false);
   };
 
@@ -60,8 +62,20 @@ const Cart: FC<CounterProps> = ({ items }) => {
       <Modal
         title="Your cart:"
         visible={isModalVisible}
-        onOk={handleOk}
         onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Return
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            disabled={!items.length}
+            onClick={handleOk}
+          >
+            Confirm order
+          </Button>,
+        ]}
       >
         <Table columns={columns} dataSource={data} />
       </Modal>
