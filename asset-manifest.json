@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nrail-challenge/static/css/main.a06ec2c0.css",
-    "main.js": "/nrail-challenge/static/js/main.9263cb88.js",
+    "main.css": "/nrail-challenge/static/css/main.a17f44e8.css",
+    "main.js": "/nrail-challenge/static/js/main.695fe2ff.js",
     "static/js/787.82489634.chunk.js": "/nrail-challenge/static/js/787.82489634.chunk.js",
     "index.html": "/nrail-challenge/index.html",
-    "main.a06ec2c0.css.map": "/nrail-challenge/static/css/main.a06ec2c0.css.map",
-    "main.9263cb88.js.map": "/nrail-challenge/static/js/main.9263cb88.js.map",
+    "main.a17f44e8.css.map": "/nrail-challenge/static/css/main.a17f44e8.css.map",
+    "main.695fe2ff.js.map": "/nrail-challenge/static/js/main.695fe2ff.js.map",
     "787.82489634.chunk.js.map": "/nrail-challenge/static/js/787.82489634.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a06ec2c0.css",
-    "static/js/main.9263cb88.js"
+    "static/css/main.a17f44e8.css",
+    "static/js/main.695fe2ff.js"
   ]
 }
