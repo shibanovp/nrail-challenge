@@ -1,0 +1,8 @@
+node_modules
+build
+migrations/**/*.js
+migrations/**/*.map
+coverage.json
+coverage
+
+yarn-error.log
