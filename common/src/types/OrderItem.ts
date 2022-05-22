@@ -1,0 +1,1 @@
+export type OrderItem = { id: string; amount: number };
