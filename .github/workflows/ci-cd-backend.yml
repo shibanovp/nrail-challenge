@@ -1,0 +1,42 @@
+name: CI-CD workflow backend
+
+on:
+  push:
+    branches:
+      - develop
+
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: install truffle & ganache
+        run: npm install -g truffle ganache
+
+      - name: install packages
+        run: yarn install --frozen-lockfile
+
+      - name: clean build
+        run: yarn workspace backend clean-build
+
+      - name: Run ganache in background
+        run: ganache -h 0.0.0.0 -p 7545 --networkId 5777 &
+
+      - name: migrate
+        run: yarn workspace backend migrate
+
+      - name: run tests
+        run: yarn workspace backend test

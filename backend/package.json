@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "truffle test",
-    "clean": "rm -rf types",
+    "clean-build": "rm -rf build",
     "generate-types-truffle": "typechain --target=truffle-v5 './build/contracts/*.json'",
     "coverage": "truffle run coverage",
     "migrate": "tsc -p ./tsconfig.migrate.json --outDir migrations && truffle migrate",
