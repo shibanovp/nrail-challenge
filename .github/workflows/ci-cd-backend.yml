@@ -38,5 +38,5 @@ jobs:
       - name: migrate
         run: yarn workspace backend migrate
 
-      - name: run tests with coverage
-        run: yarn workspace backend coverage
+      - name: run tests
+        run: yarn workspace backend test
