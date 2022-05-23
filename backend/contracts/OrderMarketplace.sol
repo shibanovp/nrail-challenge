@@ -24,15 +24,15 @@ contract OrderMarketplace {
 
     uint256 private orderCount;
 
-    constructor() {
-        setContractOwner(msg.sender);
-    }
-
     /// Only owner has an access
     error OnlyOwner();
 
     /// Order has invalid state
     error OrderInvalidState();
+
+    constructor() {
+        setContractOwner(msg.sender);
+    }
 
     modifier onlyOwner() {
         if (msg.sender != getContractOwner()) {
@@ -40,6 +40,8 @@ contract OrderMarketplace {
         }
         _;
     }
+
+    receive() external payable {}
 
     function createOrder(OrderItem[] calldata items) external payable {
         uint256 id = orderCount++;
@@ -69,8 +71,6 @@ contract OrderMarketplace {
         orders[index].state = OrderState.Cancelled;
     }
 
-    receive() external payable {}
-
     function withdraw(uint256 amount) external onlyOwner {
         (bool success, ) = owner.call{value: amount}("");
         require(success, "Withdraw failed");
@@ -78,10 +78,6 @@ contract OrderMarketplace {
 
     function selfDestruct() external onlyOwner {
         selfdestruct(owner);
-    }
-
-    function setContractOwner(address newOwner) private {
-        owner = payable(newOwner);
     }
 
     function traceOrdersByProductId(string memory id)
@@ -103,6 +99,20 @@ contract OrderMarketplace {
         return result;
     }
 
+    function getOrderById(uint256 id) external view returns (Order memory) {
+        require(id < orderCount, "Index out of bounds");
+
+        return orders[id];
+    }
+
+    function getOrderCount() external view returns (uint256) {
+        return orderCount;
+    }
+
+    function getContractOwner() public view returns (address) {
+        return owner;
+    }
+
     function getTracedByIdMatchCount(string memory id)
         internal
         view
@@ -121,17 +131,7 @@ contract OrderMarketplace {
         return count;
     }
 
-    function getContractOwner() public view returns (address) {
-        return owner;
-    }
-
-    function getOrderById(uint256 id) external view returns (Order memory) {
-        require(id < orderCount, "Index out of bounds");
-
-        return orders[id];
-    }
-
-    function getOrderCount() external view returns (uint256) {
-        return orderCount;
+    function setContractOwner(address newOwner) private {
+        owner = payable(newOwner);
     }
 }

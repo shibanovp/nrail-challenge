@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "truffle test",
-    "clean": "rm -rf build types",
+    "clean": "rm -rf types",
     "generate-types-truffle": "typechain --target=truffle-v5 './build/contracts/*.json'",
     "coverage": "truffle run coverage",
     "migrate": "tsc -p ./tsconfig.migrate.json --outDir migrations && truffle migrate",
@@ -24,11 +24,9 @@
     "common": "1.0.0",
     "solidity-coverage": "^0.8.0-beta.1",
     "truffle-typings": "^1.0.8",
+    "ts-node": "^10.7.0",
     "typechain": "^8.0.0",
     "typescript": "^4.6.4"
-  },
-  "dependencies": {
-    "ts-node": "^10.7.0"
   },
   "workspaces": {
     "nohoist": [
