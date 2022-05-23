@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: install truffle
+        run: npm install -g truffle
+
       - name: install packages
         run: yarn install --frozen-lockfile
 

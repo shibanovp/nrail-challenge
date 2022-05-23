@@ -5,7 +5,7 @@
   "license": "none",
   "private": true,
   "scripts": {
-    "test": "truffle test",
+    "test": "npx truffle test",
     "clean": "rm -rf types",
     "generate-types-truffle": "typechain --target=truffle-v5 './build/contracts/*.json'",
     "coverage": "truffle run coverage",
@@ -23,7 +23,6 @@
     "@types/web3": "^1.2.2",
     "common": "1.0.0",
     "solidity-coverage": "^0.8.0-beta.1",
-    "truffle": "^5.5.15",
     "truffle-typings": "^1.0.8",
     "ts-node": "^10.7.0",
     "typechain": "^8.0.0",
