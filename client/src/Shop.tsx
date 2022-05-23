@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { Card, Col, Row, Button, Select, Form } from "antd";
 
 import useDocumentTitle from "./useDocumentTitle";
@@ -7,7 +7,6 @@ import { CartItem } from "./CartItem";
 
 const { Meta } = Card;
 const { Option } = Select;
-const baseUrl = process.env.REACT_APP_INVENTORY_BASE_URL;
 
 type AddToCartFormProps = {
   item: InventoryItem;
@@ -73,26 +72,14 @@ const AddToCartForm: FC<AddToCartFormProps> = ({
 export type ShopProps = {
   cart: CartItem[];
   onAddToCart: (item: CartItem) => void;
-};
-
-const Shop: FC<ShopProps> = ({ cart, onAddToCart }) => {
-  useDocumentTitle("🚆 Shop");
-
-  const [inventory, setInventory] = useState<{
+  inventory: {
     items: InventoryItem[];
     isLoading: boolean;
-  }>({
-    items: [],
-    isLoading: true,
-  });
-  useEffect(() => {
-    const getInventoryItems = async () => {
-      const response = await fetch(`${baseUrl}/inventory`);
-      const json = await response.json();
-      setInventory({ items: json, isLoading: false });
-    };
-    getInventoryItems();
-  }, []);
+  };
+};
+
+const Shop: FC<ShopProps> = ({ cart, onAddToCart, inventory }) => {
+  useDocumentTitle("🚆 Shop");
 
   return (
     <>

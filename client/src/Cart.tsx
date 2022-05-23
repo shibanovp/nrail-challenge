@@ -1,10 +1,10 @@
 import { useState, FC } from "react";
 import { Affix, Modal, Button } from "antd";
-import { Table } from "antd";
+import OrderTable from "./OrderTable";
 import { CartItem } from "./CartItem";
 export type CartProps = {
   items: CartItem[];
-  onConfirm?(items: CartItem[]): void;
+  onConfirm?(): void;
 };
 
 const Cart: FC<CartProps> = ({ items, onConfirm }) => {
@@ -13,8 +13,8 @@ const Cart: FC<CartProps> = ({ items, onConfirm }) => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    onConfirm && onConfirm(items);
+  const handleOk = async () => {
+    onConfirm && onConfirm();
     setIsModalVisible(false);
   };
 
@@ -22,35 +22,16 @@ const Cart: FC<CartProps> = ({ items, onConfirm }) => {
     setIsModalVisible(false);
   };
 
-  const columns = [
-    {
-      title: "Name",
-      key: "name",
-      render: (item: CartItem) => item.product.name,
-    },
-    {
-      title: "Description",
-      key: "description",
-      render: (item: CartItem) => item.product.description,
-    },
-    {
-      title: "Amount",
-      key: "amount",
-      render: (item: CartItem) => item.amount,
-    },
-    {
-      title: "Total",
-      key: "amount",
-      render: (item: CartItem) =>
-        `${(item.product.price * item.amount) / 100} €`,
-    },
-  ];
-  const data = items.map((item) => ({ ...item, key: item.product.id }));
-
   return (
     <>
       <Affix offsetTop={0} style={{ float: "right" }}>
-        <Button size="large" type="primary" danger onClick={showModal}>
+        <Button
+          style={{ zIndex: 1 }}
+          size="large"
+          type="primary"
+          danger
+          onClick={showModal}
+        >
           {items.length
             ? `${items.length} Products with ${items.reduce(
                 (acc, item) => acc + item.amount,
@@ -73,11 +54,11 @@ const Cart: FC<CartProps> = ({ items, onConfirm }) => {
             disabled={!items.length}
             onClick={handleOk}
           >
-            Confirm order
+            Checkout
           </Button>,
         ]}
       >
-        <Table columns={columns} dataSource={data} />
+        <OrderTable items={items} />
       </Modal>
     </>
   );
