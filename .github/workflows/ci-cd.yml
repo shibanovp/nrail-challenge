@@ -24,13 +24,13 @@ jobs:
           node-version: 16.x
 
       - name: install packages
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: build
-        run: npm run build
+        run: yarn workspace client build
 
       - name: run tests
-        run: npm run test
+        run: yarn workspace client test
 
       - name: build files
         uses: actions/upload-artifact@v2

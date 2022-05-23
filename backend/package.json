@@ -11,7 +11,7 @@
     "coverage": "truffle run coverage",
     "migrate": "tsc -p ./tsconfig.migrate.json --outDir migrations && truffle migrate",
     "generate-types-client": "./node_modules/.bin/typechain --target=web3-v1 './build/contracts/*.json'",
-    "postinstall": "yarn clean && truffle compile && yarn generate-types-truffle && yarn generate-types-client"
+    "generate-types": "yarn clean && truffle compile && yarn generate-types-truffle && yarn generate-types-client"
   },
   "devDependencies": {
     "@truffle/hdwallet-provider": "^2.0.8",

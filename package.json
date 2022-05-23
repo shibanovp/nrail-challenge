@@ -1,0 +1,14 @@
+{
+  "name": "nrail-challenge",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "common",
+      "backend",
+      "client"
+    ],
+    "nohoist": [
+      "client/**"
+    ]
+  }
+}
