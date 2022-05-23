@@ -1,19 +1,8 @@
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import "./matchMediaSetup";
 import Shop from "./Shop";
 import { InventoryItem } from "./InventoryItem";
-
-window.matchMedia = (query) => ({
-  matches: false,
-  media: query,
-  onchange: null,
-  addListener: jest.fn(), // deprecated
-  removeListener: jest.fn(), // deprecated
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
-});
 
 const originalFetch = global.fetch;
 
@@ -25,7 +14,6 @@ const INVENTORY_ITEM: InventoryItem = {
   price: 10000,
   image: "https://via.placeholder.com/150",
 };
-
 beforeEach(() => {
   global.fetch = jest.fn(() =>
     Promise.resolve({
@@ -41,7 +29,13 @@ afterEach(() => {
 test("renders Shop component, calls onAddToCart on submit", async () => {
   const handler = jest.fn();
   await act(async () => {
-    render(<Shop cart={[]} onAddToCart={handler} />);
+    render(
+      <Shop
+        inventory={{ items: [INVENTORY_ITEM], isLoading: false }}
+        cart={[]}
+        onAddToCart={handler}
+      />
+    );
   });
   const cardTitle = screen.getByText(/a rail engine/i);
   expect(cardTitle).toBeInTheDocument();
@@ -58,7 +52,13 @@ test("renders Shop component, calls onAddToCart on submit", async () => {
 test("renders Shop component, calls onAddToCart on submit with amount 5", async () => {
   const handler = jest.fn();
   await act(async () => {
-    render(<Shop cart={[]} onAddToCart={handler} />);
+    render(
+      <Shop
+        inventory={{ items: [INVENTORY_ITEM], isLoading: false }}
+        cart={[]}
+        onAddToCart={handler}
+      />
+    );
   });
   const cardTitle = screen.getByText(/a rail engine/i);
   expect(cardTitle).toBeInTheDocument();

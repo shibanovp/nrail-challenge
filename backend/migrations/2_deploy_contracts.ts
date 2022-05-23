@@ -1,7 +1,7 @@
-var SampleContract = artifacts.require("SampleContract");
+var OrderMarketplace = artifacts.require("OrderMarketplace");
 
 module.exports = function (deployer) {
-  deployer.deploy(SampleContract);
+  deployer.deploy(OrderMarketplace);
 } as Truffle.Migration;
 
 export {};

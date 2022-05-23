@@ -3,19 +3,19 @@
 /* eslint-disable */
 
 import { MigrationsContract } from "./Migrations";
-import { SampleContractContract } from "./SampleContract";
+import { OrderMarketplaceContract } from "./OrderMarketplace";
 
 declare global {
   namespace Truffle {
     interface Artifacts {
       require(name: "Migrations"): MigrationsContract;
-      require(name: "SampleContract"): SampleContractContract;
+      require(name: "OrderMarketplace"): OrderMarketplaceContract;
     }
   }
 }
 
 export { MigrationsContract, MigrationsInstance } from "./Migrations";
 export {
-  SampleContractContract,
-  SampleContractInstance,
-} from "./SampleContract";
+  OrderMarketplaceContract,
+  OrderMarketplaceInstance,
+} from "./OrderMarketplace";
