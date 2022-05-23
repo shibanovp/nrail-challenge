@@ -24,10 +24,19 @@ jobs:
           node-version: 16.x
 
       - name: install truffle
-        run: npm install -g truffle
+        run: npm install -g truffle ganache
 
       - name: install packages
         run: yarn install --frozen-lockfile
 
-      - name: run tests
-        run: yarn workspace backend test
+      - name: clean build
+        run: yarn workspace backend clean-build
+
+      - name: Run ganache in background
+        run: ganache -h 0.0.0.0 -p 7545 --networkId 5777 &
+
+      - name: migrate
+        run: yarn workspace backend migrate
+
+      - name: run tests with coverage
+        run: yarn workspace backend coverage
