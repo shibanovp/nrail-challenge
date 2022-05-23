@@ -29,8 +29,5 @@ jobs:
       - name: install packages
         run: yarn install --frozen-lockfile
 
-      - name: migrate
-        run: yarn workspace backend migrate --reset
-
       - name: run tests
         run: yarn workspace backend test
