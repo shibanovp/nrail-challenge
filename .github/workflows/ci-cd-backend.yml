@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: install truffle
+      - name: install truffle & ganache
         run: npm install -g truffle ganache
 
       - name: install packages
