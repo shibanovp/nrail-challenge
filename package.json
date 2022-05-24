@@ -5,7 +5,8 @@
     "packages": [
       "common",
       "backend",
-      "client"
+      "client",
+      "esp8266-client"
     ],
     "nohoist": [
       "client/**"
