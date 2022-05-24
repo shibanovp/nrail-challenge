@@ -9,8 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "postinstall": "yarn run build"
+    "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^4.6.4"
