@@ -1,0 +1,15 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "Unlicense",
+  "private": true,
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "dev": "HEADFUL=true ts-node ./src/index.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^14.1.1",
+    "ts-node": "^10.8.0"
+  }
+}
