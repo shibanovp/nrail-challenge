@@ -6,7 +6,8 @@
       "common",
       "backend",
       "client",
-      "esp8266-client"
+      "esp8266-client",
+      "e2e"
     ],
     "nohoist": [
       "client/**"
