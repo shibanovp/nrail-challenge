@@ -59,7 +59,8 @@ contract OrderMarketplace {
         if (orders[index].state != OrderState.Created) {
             revert OrderInvalidState();
         }
-        orders[index].state = OrderState.Confirmed;
+        Order storage order = orders[index];
+        order.state = OrderState.Confirmed;
     }
 
     function cancelOrder(uint256 index) external onlyOwner {
@@ -68,7 +69,9 @@ contract OrderMarketplace {
         if (orders[index].state != OrderState.Created) {
             revert OrderInvalidState();
         }
-        orders[index].state = OrderState.Cancelled;
+
+        Order storage order = orders[index];
+        order.state = OrderState.Cancelled;
     }
 
     function withdraw(uint256 amount) external onlyOwner {

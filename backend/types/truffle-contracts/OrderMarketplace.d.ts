@@ -110,8 +110,6 @@ export interface OrderMarketplaceInstance extends Truffle.ContractInstance {
     }[]
   >;
 
-  getContractOwner(txDetails?: Truffle.TransactionDetails): Promise<string>;
-
   getOrderById(
     id: number | BN | string,
     txDetails?: Truffle.TransactionDetails
@@ -123,6 +121,8 @@ export interface OrderMarketplaceInstance extends Truffle.ContractInstance {
   }>;
 
   getOrderCount(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
+  getContractOwner(txDetails?: Truffle.TransactionDetails): Promise<string>;
 
   methods: {
     createOrder: {
@@ -222,8 +222,6 @@ export interface OrderMarketplaceInstance extends Truffle.ContractInstance {
       }[]
     >;
 
-    getContractOwner(txDetails?: Truffle.TransactionDetails): Promise<string>;
-
     getOrderById(
       id: number | BN | string,
       txDetails?: Truffle.TransactionDetails
@@ -235,6 +233,8 @@ export interface OrderMarketplaceInstance extends Truffle.ContractInstance {
     }>;
 
     getOrderCount(txDetails?: Truffle.TransactionDetails): Promise<BN>;
+
+    getContractOwner(txDetails?: Truffle.TransactionDetails): Promise<string>;
   };
 
   getPastEvents(event: string): Promise<EventData[]>;

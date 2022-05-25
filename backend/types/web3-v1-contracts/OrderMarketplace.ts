@@ -49,8 +49,6 @@ export interface OrderMarketplace extends BaseContract {
       [string, [string, string][], string, string][]
     >;
 
-    getContractOwner(): NonPayableTransactionObject<string>;
-
     getOrderById(
       id: number | string | BN
     ): NonPayableTransactionObject<
@@ -58,6 +56,8 @@ export interface OrderMarketplace extends BaseContract {
     >;
 
     getOrderCount(): NonPayableTransactionObject<string>;
+
+    getContractOwner(): NonPayableTransactionObject<string>;
   };
   events: {
     allEvents(options?: EventOptions, cb?: Callback<EventLog>): EventEmitter;
