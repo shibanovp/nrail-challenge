@@ -1,0 +1,33 @@
+name: CI-CD workflow esp8266-client
+
+on:
+  push:
+    branches:
+      - develop
+
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: install packages
+        run: yarn install --frozen-lockfile
+
+      - name: build
+        run: GENERATE_SOURCEMAP=false yarn workspace esp8266-client build
+
+      - name: run tests
+        run: yarn workspace esp8266-client test
